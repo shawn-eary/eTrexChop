@@ -2,7 +2,7 @@
 Command-line Utility to Trim Track Points out of an eTrex 30x GPX File
 
         1        2        3        4        5        6        7
-12345789012345789012345789012345789012345789012345789012345789012
+12345789012345789012345789012345789012345789012345789012345789012<br />
 Only supports trimming from the front of the GPX file with zero
 offset right now.  I will fix the rest of the issues eventually,
 but I will personally be using this tool when I don't have
