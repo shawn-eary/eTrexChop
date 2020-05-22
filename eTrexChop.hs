@@ -10,11 +10,19 @@ import System.IO
 import Text.XML.Light
 import Data.Time.Clock
 import Data.Time.Format
-import Debug.Trace
+--import Debug.Trace
 
 
 
--- https://stackoverflow.com/questions/4174372/haskell-date-parsing-and-formatting
+--
+-- Purpose:
+--   Takes an GPX trkpt Element and returns the associated UTCTime
+--
+-- e:
+--   The GPX trkpt to get the UTCTime from
+--
+-- returns:
+--   The UTCTime that is contained in that GPX trkpt
 getTimeOfPoint :: Element -> UTCTime
 getTimeOfPoint e = do
    let theElementsOfPoint = onlyElems (elContent e)
@@ -23,13 +31,16 @@ getTimeOfPoint e = do
    let theText = onlyText theContent
    let theDate = cdData (theText !! 0)
    let dateString = theDate
+
+   -- To see how to parse a UTCTime from a string in Haskell refer to [2]
    let timeFromString =
-         parseTimeOrError
-           True
-           defaultTimeLocale
-           "%Y-%m-%dT%H:%M:%SZ"
-           dateString :: UTCTime
+        parseTimeOrError
+        True
+        defaultTimeLocale
+        "%Y-%m-%dT%H:%M:%SZ"
+        dateString :: UTCTime
    timeFromString
+
 
 
 -- https://en.wikibooks.org/wiki/Haskell/Pattern_matching
@@ -72,11 +83,13 @@ trimTrkSegInternal
 
 trimTrkSeg :: [Content] -> Bool -> Int -> Int -> [Content]
 trimTrkSeg trkSegContent goForward offsetInSeconds amountToTrimInSeconds = do
-   let trkSegElems =
-         if goForward then do
-             onlyElems trkSegContent
-         else do
-             reverse (onlyElems trkSegContent)
+   let contentToProcess =
+        if goForward then
+           trkSegContent
+        else
+           reverse trkSegContent
+
+   let trkSegElems = onlyElems contentToProcess
 
    let startingTrkPt1 = trkSegElems !! 0
    let startingPt1Date = getTimeOfPoint startingTrkPt1
@@ -84,17 +97,14 @@ trimTrkSeg trkSegContent goForward offsetInSeconds amountToTrimInSeconds = do
    let trimmedList =
          trimTrkSegInternal
          startingPt1Date
-         trkSegContent
+         contentToProcess
          goForward
          offsetInSeconds
          amountToTrimInSeconds
    if goForward then
        trimmedList
    else
-       trimmedList
-      -- I'm not sure why I'm commenting this out...
-      -- seems I need to reverse the list back...
-      -- reverse trimmedList
+       reverse trimmedList
 
 
 

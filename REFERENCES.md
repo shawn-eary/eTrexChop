@@ -15,6 +15,12 @@ https://stackoverflow.com/questions/4619206/parse-xml-in-haskell
 January 6, 2011
 [Last Accessed: April 29, 2020]
 
+[2] - Perry, Tim; Baranosky, Alex; et al.
+Haskell Date Parsing and Formatting
+https://stackoverflow.com/questions/4174372/haskell-date-parsing-and-formatting
+January 26, 2012
+[Last Accessed: May 21, 2020]
+
 
 
 ------------------------------------------------------------
