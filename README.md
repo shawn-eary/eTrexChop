@@ -3,11 +3,13 @@ Command-line Utility to Trim Track Points out of an eTrex 30x GPX File
 
         1        2        3        4        5        6        7
 12345789012345789012345789012345789012345789012345789012345789012<br />
-Only supports trimming from the front of the GPX file with zero
-offset right now.  I will fix the rest of the issues eventually,
-but I will personally be using this tool when I don't have
-access to Garming Basecamp and I just want to trim some points 
-from the front and (eventually back) of an eTrex GPX file.
+Does not support offsets right now.  May crash in MS Windows but
+seems to work in GNU\Linux.  
+
+I will fix the issues eventually,but I will personally be using
+this tool when I don't have "easy" access to Garming Basecamp
+and I just want to trim some points from the front and
+(eventually back) of an eTrex GPX file.
 
 Problem is I sometimes have to start my eTrex before I start
 my event, so I have non-relvent data at the first of the
